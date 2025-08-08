@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
+
 import '../models/receipt.dart';
 import '../services/database_service.dart';
 import '../services/api_service.dart';
@@ -42,6 +43,7 @@ class ReceiptProvider extends ChangeNotifier {
       _receipts.insert(0, newReceipt);
       _clearError();
     } catch (e) {
+      print(e);
       _setError('Failed to add receipt: $e');
     } finally {
       _setLoading(false);

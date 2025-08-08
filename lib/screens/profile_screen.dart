@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../providers/receipt_provider.dart';
 import '../utils/app_theme.dart';
 import '../utils/helpers.dart';
@@ -21,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
         child: Column(
           children: [
             // Profile header
-            _buildProfileHeader(context),
+            // _buildProfileHeader(context),
             
             const SizedBox(height: 24),
             
@@ -31,40 +32,40 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             
             // Settings sections
-            _buildSettingsSection(
-              context,
-              'App Settings',
-              [
-                _buildSettingsTile(
-                  context,
-                  'Notifications',
-                  'Manage notification preferences',
-                  Icons.notifications_outlined,
-                  () => _showNotificationSettings(context),
-                ),
-                _buildSettingsTile(
-                  context,
-                  'Currency',
-                  'Change currency format',
-                  Icons.monetization_on_outlined,
-                  () => _showCurrencySettings(context),
-                ),
-                _buildSettingsTile(
-                  context,
-                  'Data Export',
-                  'Export your receipt data',
-                  Icons.download_outlined,
-                  () => _showExportOptions(context),
-                ),
-                _buildSettingsTile(
-                  context,
-                  'Backup & Restore',
-                  'Manage your data backups',
-                  Icons.backup_outlined,
-                  () => _showBackupOptions(context),
-                ),
-              ],
-            ),
+            // _buildSettingsSection(
+            //   context,
+            //   'App Settings',
+            //   [
+            //     _buildSettingsTile(
+            //       context,
+            //       'Notifications',
+            //       'Manage notification preferences',
+            //       Icons.notifications_outlined,
+            //       () => _showNotificationSettings(context),
+            //     ),
+            //     _buildSettingsTile(
+            //       context,
+            //       'Currency',
+            //       'Change currency format',
+            //       Icons.monetization_on_outlined,
+            //       () => _showCurrencySettings(context),
+            //     ),
+            //     _buildSettingsTile(
+            //       context,
+            //       'Data Export',
+            //       'Export your receipt data',
+            //       Icons.download_outlined,
+            //       () => _showExportOptions(context),
+            //     ),
+            //     _buildSettingsTile(
+            //       context,
+            //       'Backup & Restore',
+            //       'Manage your data backups',
+            //       Icons.backup_outlined,
+            //       () => _showBackupOptions(context),
+            //     ),
+            //   ],
+            // ),
             
             const SizedBox(height: 24),
             

@@ -1,42 +1,43 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
+
 import '../models/receipt.dart';
 
 class ApiService {
-  static const String baseUrl = 'https://api.receiptsprocessor.com'; // Replace with actual API URL
+  static const String baseUrl = 'https://api.receiptsprocessor.com';
   static const Duration timeout = Duration(seconds: 30);
 
-  // Mock function - Replace with actual API endpoint
   Future<Receipt> processReceiptImage(File imageFile) async {
     try {
-      // This is a mock implementation
-      // In a real app, you would send the image to your API
-      
-      // For demonstration, we'll simulate API processing with a delay
-      await Future.delayed(const Duration(seconds: 2));
-      
-      // Mock response based on the image name or random data
-      final mockReceipt = _generateMockReceipt(imageFile.path);
-      return mockReceipt;
-      
-      // Real API call would look like this:
-      /*
-      var request = http.MultipartRequest('POST', Uri.parse('$baseUrl/process-receipt'));
-      request.files.add(await http.MultipartFile.fromPath('image', imageFile.path));
-      request.headers.addAll({
-        'Content-Type': 'multipart/form-data',
-        'Authorization': 'Bearer YOUR_API_KEY',
+      final dio = Dio();
+
+      final formData = FormData.fromMap({
+        'file': await MultipartFile.fromFile(
+          imageFile.path,
+          filename: imageFile.path.split('/').last,
+        ),
       });
 
-      var response = await request.send().timeout(timeout);
-      
+      final response = await dio.post(
+        'https://zynthdev321-gemini-data-extractor.hf.space/extract-receipt',
+        data: formData,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          responseType: ResponseType.json,
+        ),
+      );
+
       if (response.statusCode == 200) {
-        final responseBody = await response.stream.bytesToString();
-        final jsonData = json.decode(responseBody);
-        return Receipt.fromJson(jsonData);
+        final data = response.data;
+
+        // You should map the response JSON into your Receipt model here
+        final receipt = Receipt.fromApiResponse(data, imageFile.path); // Replace with your actual mapping logic
+        return receipt;
       } else {
-        throw ApiException('Failed to process receipt: ${response.statusCode}');
+        throw ApiException('Failed to process receipt. Status code: ${response.statusCode}');
       }
-      */
     } catch (e) {
       throw ApiException('Error processing receipt: $e');
     }

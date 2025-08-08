@@ -28,14 +28,14 @@ class ReceiptDetailScreen extends StatelessWidget {
           PopupMenuButton<String>(
             onSelected: (value) => _handleMenuAction(context, value),
             itemBuilder: (context) => [
-              const PopupMenuItem(
-                value: 'edit',
-                child: ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text('Edit'),
-                  contentPadding: EdgeInsets.zero,
-                ),
-              ),
+              // const PopupMenuItem(
+              //   value: 'edit',
+              //   child: ListTile(
+              //     leading: Icon(Icons.edit),
+              //     title: Text('Edit'),
+              //     contentPadding: EdgeInsets.zero,
+              //   ),
+              // ),
               const PopupMenuItem(
                 value: 'delete',
                 child: ListTile(

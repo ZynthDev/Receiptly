@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
 	<key>CFBundleDevelopmentRegion</key>
@@ -45,13 +47,11 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
-
-    <!-- PERMISSIONS -->
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to camera to scan receipts</string>
+	<string>Our app needs access to camera to scan receipts and generate data</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to photo library to select receipt images</string>
+	<string>Our app needs access to photo library to select receipt imagesand generate data</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs access to photo library to save receipt images</string>
+	<string>Our app needs access to photo library to save receipt images</string>
 </dict>
 </plist>

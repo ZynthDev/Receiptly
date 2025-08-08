@@ -67,7 +67,7 @@ class ExpenseCategory {
   static ExpenseCategory getCategoryByName(String name) {
     return categories.firstWhere(
       (category) => category.name == name,
-      orElse: () => categories.last, // Return 'Other' as default
+      orElse: () => categories.last,
     );
   }
 

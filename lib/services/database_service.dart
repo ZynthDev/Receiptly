@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
 import '../models/receipt.dart';
 
 class DatabaseService {
@@ -61,13 +62,15 @@ class DatabaseService {
 
   // Receipt operations
   Future<int> insertReceipt(Receipt receipt) async {
+    print(receipt.toMap());
     final db = await database;
     
     // Insert receipt
-    final receiptId = await db.insert('receipts', receipt.toMap());
+    final receiptId = await db.insert('receipts', receipt.toMapForDb());
     
     // Insert receipt items
     for (final item in receipt.items) {
+      print(item.toMap());
       await db.insert('receipt_items', {
         ...item.toMap(),
         'receiptId': receiptId,

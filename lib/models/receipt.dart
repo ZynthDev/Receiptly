@@ -65,6 +65,18 @@ class Receipt {
     };
   }
 
+  Map<String, dynamic> toMapForDb() {
+    return {
+      'imagePath': imagePath,
+      'merchantName': merchantName,
+      'totalAmount': totalAmount,
+      'date': date.millisecondsSinceEpoch,
+      'category': category,
+      'notes': notes,
+      'createdAt': createdAt.millisecondsSinceEpoch,
+    };
+  }
+
   factory Receipt.fromMap(Map<String, dynamic> map) {
     return Receipt(
       id: map['id'],
@@ -101,6 +113,38 @@ class Receipt {
       notes: notes ?? this.notes,
       createdAt: createdAt ?? this.createdAt,
     );
+  }
+
+  static Receipt fromApiResponse(Map<String, dynamic> json, String imagePath) {
+    final List<ReceiptItem> parsedItems = (json['items'] as List<dynamic>)
+        .map((item) => ReceiptItem(
+      name: item['description'] ?? 'Unknown',
+      price: (item['total_price'] ?? 0.0).toDouble(),
+      quantity: item['quantity'] ?? 1,
+      category: null, // You may assign a category if needed
+    ))
+        .toList();
+
+    return Receipt(
+      id: null,
+      imagePath: imagePath,
+      merchantName: json['business_name'] ?? 'Unknown',
+      totalAmount: (json['total'] ?? 0.0).toDouble(),
+      date: _parseDate(json['date'], json['time']),
+      category: json['category'] ?? 'Other',
+      items: parsedItems,
+      notes: json['receipt_number'],
+      createdAt: DateTime.now(),
+    );
+  }
+
+  static DateTime _parseDate(String? dateStr, String? timeStr) {
+    try {
+      final dateTimeString = '${dateStr ?? ''} ${timeStr ?? ''}'.trim();
+      return DateTime.parse(dateTimeString);
+    } catch (_) {
+      return DateTime.now();
+    }
   }
 }
 
